@@ -1,0 +1,6 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Hello World" type="CMakeRunConfiguration" factoryName="Application" singleton="true" PROGRAM_PARAMS="example/hello_world.ry" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="RinGy" TARGET_NAME="RinGy" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="RinGy" RUN_TARGET_NAME="RinGy">
+    <envs />
+    <method />
+  </configuration>
+</component>

@@ -9,7 +9,7 @@
 using namespace std;
 
 int RinGyVM::exec(const char *opcodes, int length) {
-    for (int i = 0; i < length; i++) {
+    for (char i = 0; i < length; i++) {
         if (opcodes[i] == '<') {
             if (memoryPointer_ > 0)
                 memoryPointer_--;
@@ -50,6 +50,50 @@ int RinGyVM::exec(const char *opcodes, int length) {
             cout << memory_[memoryPointer_];
         } else if (opcodes[i] == ',') {
             printf("%c", memory_[memoryPointer_]);
+        } else if (opcodes[i] == '[') {
+            stack.push_back(memory_[memoryPointer_]);
+        } else if (opcodes[i] == ']') {
+            memory_[memoryPointer_] = stack.back();
+            stack.pop_back();
+        } else if (opcodes[i] == '~') {
+            //continue;
+            char old = i;
+            i = memory_[memoryPointer_];
+            memory_[memoryPointer_] = old;
+        } else if (opcodes[i] == '#') {
+            memory_[memoryPointer_] = i;
+        } else if (opcodes[i] == '$') {
+            char first = stack.back();
+            stack.pop_back();
+            char second = stack.back();
+            stack.pop_back();
+
+            if (first == second) {
+                stack.push_back(1);
+            } else {
+                stack.push_back(0);
+            }
+        } else if (opcodes[i] == '(') {
+            if (memory_[memoryPointer_] == 0) {
+                i = stack.back();
+                stack.pop_back();
+            }
+        } else if (opcodes[i] == ')') {
+            if (memory_[memoryPointer_] != 0) {
+                i = stack.back();
+                stack.pop_back();
+            }
+        } else if (opcodes[i] == '^') {
+            memory_[memoryPointer_] = '\n';
+            do {
+                memory_[memoryPointer_] = (char) getchar();
+            } while (memory_[memoryPointer_] == '\n');
+            memoryPointer_++;
+            flush(cout);
+        } else if (opcodes[i] == '@') {
+            memory_[memoryPointer_] = 0;
+        } else if (opcodes[i] == '!') {
+            memoryPointer_ = 0;
         } else {
             cerr << "Invalid command: " << opcodes[i] << endl;
             return 1;

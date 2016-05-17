@@ -2,7 +2,7 @@
 A C++ VM for a re-thought [RinGy](https://esolangs.org/wiki/RinGy).
 
 # Stack
-Rin
+RinGy 2.0 has a 255-value stack available for use now.
 
 # New Opcodes
 To make this an actually usable VM, I added the following opcodes:
@@ -17,6 +17,8 @@ To make this an actually usable VM, I added the following opcodes:
 | (          | Jump to the offset in the last stack value, only if current cell == 0.
 | )          | Same as above, but only if cell != 0.
 | ^          | Read a single char from stdin, place it into the current cell, and increment memory pointer.
+| @          | Set the current cell to 0.
+| !          | Set the memory pointer to 0.
 
 'c' may be any character, and 'n' may be any integer.
 
